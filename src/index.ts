@@ -72,10 +72,6 @@ const port = 8080;
 
 app.use(express.json());
 
-app.get("/:name", (req, res) => {
-  const { name } = req.params;
-  return res.json(find_task(name));
-});
 app.get("/", (req, res) => {
   const { name } = req.query as { name: string; };
   if (name)
@@ -86,8 +82,8 @@ app.post("/", (req, res) => {
   const { name, description, position } = req.body;
   return res.json(add_task({ name, description }, position));
 });
-app.delete("/:name", (req, res) => {
-  const { name } = req.params;
+app.delete("/", (req, res) => {
+  const { name } = req.query as { name: string; };
   return res.json(remove_task(name));
 });
 app.post("/move", (req, res) => {
@@ -99,3 +95,7 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
 
+process.on("SIGINT", () => {
+  console.log("\nCtrl-C was pressed\n");
+  process.exit();
+});

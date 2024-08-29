@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "bun src/index.ts",
+    "test": "jest --forceExit",
+    "start": "bun run src/index.ts",
     "postversion": "git push --follow-tags"
   },
   "type": "module",
